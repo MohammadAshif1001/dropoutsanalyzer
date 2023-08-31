@@ -1,0 +1,298 @@
+/* UTILITIES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: cursive;
+    /* overflow-x: hidden; */
+  }
+  
+  a {
+    text-decoration: none;
+  }
+  
+  li {
+    list-style: none;
+  }
+header {
+    background-color: #35424a;
+    color: white;
+    text-align: center;
+    padding: 1em;
+}
+
+.slider {
+  position: relative;
+  z-index: 1; 
+}
+
+/* NAVBAR STYLING STARTS */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: teal;
+  color: #fff;
+  position: relative;
+  z-index: 2; /* Adjust the value to make the navbar appear above the slider */
+}
+
+.nav-links a {
+  color: #fff;
+}
+
+/* LOGO */
+.logo {
+  font-size: 32px;
+}
+
+/* NAVBAR MENU */
+.menu {
+  display: flex;
+  gap: 1em;
+  font-size: 18px;
+}
+
+.menu li:hover {
+  background-color: #4c9e9e;
+  border-radius: 5px;
+  transition: 0.3s ease;
+}
+
+.menu li {
+  padding: 5px 14px;
+}
+
+/* DROPDOWN MENU */
+.services {
+  position: relative; 
+}
+
+.dropdown {
+  background-color: rgb(1, 139, 139);
+  padding: 1em 0;
+  position: absolute; 
+  display: none;
+  border-radius: 8px;
+  top: 35px;
+}
+
+.dropdown li + li {
+  margin-top: 10px;
+}
+
+.dropdown li {
+  padding: 0.5em 1em;
+  width: 8em;
+  text-align: center;
+}
+
+.dropdown li:hover {
+  background-color: #4c9e9e;
+}
+
+.services:hover .dropdown {
+  display: block;
+}
+/* RESPONSIVE NAVBAR MENU STARTS */
+
+/* CHECKBOX HACK */
+
+input[type=checkbox] {
+    display: none;
+  } 
+  
+  /* HAMBURGER MENU */
+  .hamburger {
+    display: none;
+    font-size: 24px;
+    user-select: none;
+  }
+  
+  /* APPLYING MEDIA QUERIES */
+  @media (max-width: 768px) {
+   .menu {
+      display:none;
+      position: absolute;
+      background-color:teal;
+      right: 0;
+      left: 0;
+      text-align: center;
+      padding: 16px 0;
+    }
+  
+    .menu li:hover {
+      display: inline-block;
+      background-color:#4c9e9e;
+      transition: 0.3s ease;
+    }
+  
+    .menu li + li {
+      margin-top: 12px;
+    }
+  
+    input[type=checkbox]:checked ~ .menu {
+      display: block;
+    }
+  
+    .hamburger {
+      display: block;
+    }
+  
+    .dropdown {
+      left: 50%;
+      top: 30px;
+      transform: translateX(35%);
+    }
+  
+    .dropdown li:hover {
+      background-color: #4c9e9e;
+    }
+  }
+
+
+
+
+.curved-background__curved {
+/* Background color */
+background-color: #d1d5db;
+
+/* background: linear-gradient(rgba(0, 0, 0, 0.2) 0%, rgba(0, 0, 0, 0.1) 100%); */
+
+/* Curved corners */
+border-bottom-left-radius: 50% 40%;
+border-bottom-right-radius: 50% 40%;
+
+/* Size */
+height: 50%;
+width: 100%;
+}
+
+/* Footer */
+/* Styling for the social media buttons */
+.btn-floating {
+  font-size: 18px;
+  height: 50px;
+  width: 50px;
+  text-align: center;
+  line-height: 50px;
+  border-radius: 50%;
+  
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 5px;
+}
+
+.btn-floating:hover {
+  background-color: #e91e63;
+  color: white;
+}
+
+/* Styling for the copyright section */
+.text-dark {
+  color: #333 !important;
+}
+
+.p-3 {
+  padding: 1rem !important;
+}
+
+/* Full-width footer */
+.my-5 {
+  margin-top: 2.5rem !important;
+  margin-bottom: 2.5rem !important;
+}
+
+/* Center alignment */
+.footer {
+  /* display: flex; */
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  .footer-col {
+    width: 50% !important;
+    margin-bottom: 30px !important;
+  }
+}
+
+@media (max-width: 574px) {
+  .footer-col {
+    width: 100% !important;
+  }
+}
+/* Footer End */
+
+
+
+
+/* For Data Section */
+.data-section {
+  background-color: #f5f5f5;
+  padding: 10px 0;
+}
+
+/* Style for the data container */
+.data-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+}
+
+/* Placeholder styles for the graphs */
+.graph {
+  width: 100%;
+  height: 400px;
+  border: 1px solid #ddd;
+  margin-bottom: 40px;
+}
+
+
+
+
+
+/* For extra info or card Section */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  text-align: center;
+  padding: 20px;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+  margin: 0 5px;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
