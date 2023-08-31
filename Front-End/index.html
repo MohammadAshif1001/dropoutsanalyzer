@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="include/Style/style.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- for profile card css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Your meta tags and CSS styles here -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+
+
+    <title>Dropout's Student | Data Analyzer</title>
+
+</head>
+
+<body>
+    <div class="nav">
+        <nav class="navbar">
+            <!-- LOGO -->
+            <div class="logo">Data Analyzer</div>
+
+            <!-- NAVIGATION MENU -->
+            <ul class="nav-links">
+
+                <!-- USING CHECKBOX HACK -->
+                <input type="checkbox" id="checkbox_toggle" />
+                <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+
+                <!-- NAVIGATION MENUS -->
+                <div class="menu">
+
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/">About</a></li>
+
+                    <li class="services">
+                        <a href="/">Services</a>
+
+                        <!-- DROPDOWN MENU -->
+                        <ul class="dropdown">
+                            <li><a href="/">Dropdown 1 </a></li>
+                            <li><a href="/">Dropdown 2</a></li>
+                        </ul>
+
+                    </li>
+                    <li><a href="/">Text</a></li>
+                    <li><a href="/">Contact</a></li>
+                </div>
+            </ul>
+        </nav>
+    </div>
+
+    <style>
+        .map-data-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50vh;
+            /* Adjust this value as needed */
+            background-color: #f0f0f0;
+            margin: 0.5em;
+        }
+
+        /* Container for map and data */
+        .map-data-container {
+            max-width: 100%;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+            background-color: white;
+
+        }
+
+        /* Map container */
+        .map-container {
+            /* Your existing styles for .map-container */
+            overflow-x: hidden;
+            /* Hide horizontal overflow */
+            position: relative;
+            box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
+        }
+
+        .scroll-button {
+            position: absolute;
+            right: 10px;
+            /* Adjust the position as needed */
+            top: 50%;
+            /* Center vertically */
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* Style the scroll button when hovered */
+        .scroll-button:hover {
+            background-color: rgba(0, 0, 0, 0.7);
+        }
+
+        /* Media query for mobile view */
+        @media (max-width: 768px) {
+            .map-container {
+                overflow-x: scroll;
+                /* Enable horizontal scroll for mobile */
+            }
+        }
+
+        /* Media query for mobile view */
+        @media (max-width: 768px) {
+            .map-data-section {
+                min-height: auto;
+                /* Reset the minimum height */
+                overflow: visible;
+                /* Show content that may be hidden */
+            }
+
+            .map-data-container {
+                padding: 10px;
+            }
+        }
+    </style>
+    <!-- Img Slider 
+-->
+    <div class="slider">
+        <div class="owl-carousel owl-theme" id="slider" style=margin-top:1em;>
+            <div class="item">
+                <img src="include/Img/1.png" class="d-block w-100">
+            </div>
+            <div class="item">
+                <img src="include/Img/2.png" class="d-block w-100">
+            </div>
+            <div class="item">
+                <img src="include/Img/3.png" class="d-block w-100">
+            </div>
+            <div class="item">
+                <img src="include/Img/4.png" class="d-block w-100">
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Main Data Section -->
+
+    <section class="data-section">
+        <div class="curved-background"
+            style="height: 10vh; display: flex; justify-content: center; align-items: center;">
+            <div class="curved-background__curved">
+                <h1 style="text-align: center;">
+                    <strong>Dropout's Data Analysis</strong>
+                </h1>
+            </div>
+        </div>
+
+
+        <div class="data-container">
+            <!-- Bar Chart -->
+            <div class="graph" id="barChart">
+                <canvas id="barChartCanvas"></canvas>
+            </div>
+
+            <!-- Pie Chart -->
+            <div class="graph" id="pieChart">
+                <canvas id="pieChartCanvas"></canvas>
+            </div>
+
+            <!-- Line Chart -->
+            <div class="graph" id="lineChart">
+                <canvas id="lineChartCanvas"></canvas>
+            </div>
+
+            <!-- Doughnut Chart -->
+            <div class="graph" id="doughnutChart">
+                <canvas id="doughnutChartCanvas"></canvas>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Map Data Section -->
+    <div class="curved-background" style="height: 10vh; display: flex; justify-content: center; align-items: center;">
+        <div class="curved-background__curved">
+            <h1 style="text-align: center;">
+                <strong>Map-Wise Data</strong>
+            </h1>
+        </div>
+    </div>
+
+    <section class="map-data-section">
+        <div class="map-data-container">
+            <div class="map-container">
+
+                <div class="curved-background"
+                    style="height: 10vh; display: flex; justify-content: center; align-items: center;">
+                    <div class="curved-background__curved">
+                        <div class="tomap-container">
+
+                        </div>
+                    </div>
+                </div>
+                <!--  Styles  -->
+<link type="text/css" rel="stylesheet" href="zcolorbrewer.css" />
+
+<div id="chart"></div>
+
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/topojson.v1.min.js"></script>
+
+<script type="text/javascript" src="d3.geo.min.js"></script>
+<!-- <div class="tooltip" style="opacity: 0;"></div> -->
+<script type="text/javascript">
+var w = 650;
+var h = 650;
+var proj = d3.geo.mercator();
+var path = d3.geo.path().projection(proj);
+var t = proj.translate(); // the projection's default translation
+var s = proj.scale() // the projection's default scale
+
+var buckets = 9,
+    colors = ["#ffffd9", "#edf8b1", "#c7e9b4", "#7fcdbb", "#41b6c4", "#1d91c0", "#225ea8", "#253494",
+        "#081d58"
+    ]; // alternatively colorbrewer.YlGnBu[9]
+
+var map = d3.select("#chart").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+    //.call(d3.behavior.zoom().on("zoom", redraw))
+    .call(initialize);
+
+var india = map.append("svg:g")
+    .attr("id", "india");
+
+var div = d3.select(".tomap-container").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0)
+    .style("font-weight", "bold") // Add more styles here
+    .style("font-size", "1.5em") // Add more styles here
+    .style("border", "2px solid white") // Add more styles here
+
+    .style("padding", "0"); // Format: top right bottom left
+
+
+
+d3.json("states.json", function(json) {
+
+    var maxTotal = d3.max(json.features, function(d) {
+        return d.total
+    });
+
+    var colorScale = d3.scale.quantile()
+        .domain(d3.range(buckets).map(function(d) {
+            return (d / buckets) * maxTotal
+        }))
+        .range(colors);
+
+
+    var y = d3.scale.sqrt()
+        .domain([0, 10000])
+        .range([0, 300]);
+
+    var yAxis = d3.svg.axis()
+        .scale(y)
+        .tickValues(colorScale.domain())
+        .orient("right");
+
+
+    india.selectAll("path")
+        .data(json.features)
+        .enter().append("path")
+        .attr("d", path)
+        .style("fill", colors[0])
+        .style("opacity", 0.5)
+
+        .on('click', function(d, i) {
+            d3.select(this).transition().duration(300).style("opacity", 1);
+            div.transition().duration(300)
+                .style("opacity", 1)
+            div.text(d.id + " : " + d.total)
+                .style("left", (d3.event.pageX) + "px")
+                .style("top", (d3.event.pageY - 30) + "px");
+        })
+
+        .on('mouseleave', function(d, i) {
+            d3.select(this).transition().duration(300)
+                .style("opacity", 0.5);
+            div.transition().duration(300)
+                .style("opacity", 0);
+        })
+        .on('mouseenter', function(d, i) {
+            d3.select(this).transition().duration(300)
+                .style("opacity", 0.5);
+            div.transition().duration(300)
+                .style("opacity", 0);
+
+        });
+
+    india.selectAll("path").transition().duration(1000)
+        .style("fill", function(d) {
+            return colorScale(d.total);
+        });
+
+
+
+    //Adding legend for our Choropleth
+
+
+    var g = india.append("g")
+        .attr("class", "key")
+        .attr("transform", "translate(445, 305)")
+        .call(yAxis);
+
+    g.selectAll("rect")
+        .data(colorScale.range().map(function(d, i) {
+            return {
+                y0: i ? y(colorScale.domain()[i - 1]) : y.range()[0],
+                y1: i < colorScale.domain().length ? y(colorScale.domain()[i]) : y.range()[1],
+                z: d
+            };
+        }))
+        .enter().append("rect")
+        .attr("width", 7)
+        .attr("y", function(d) {
+            return d.y0;
+        })
+        .attr("height", function(d) {
+            return d.y1 - d.y0;
+        })
+        .style("fill", function(d) {
+            return d.z;
+        });
+
+
+});
+
+function initialize() {
+    proj.scale(6700);
+    proj.translate([-1240, 720]);
+}
+</script>
+            </div>
+
+
+        </div>
+
+        <button class="scroll-button" id="scrollRightButton">Scroll Right</button>
+        </div>
+    </section>
+    <!-- Map Data Section End-->
+
+
+
+    <!-- Profile Section-->
+    <div class="curved-background" style="height: 10vh; display: flex; justify-content: center; align-items: center;">
+        <div class="curved-background__curved">
+            <h1 style="text-align: center;">
+                <strong>Profile's</strong>
+            </h1>
+        </div>
+    </div>
+
+    <div class=" owl-carousel owl-theme" id="pro_slider" style=margin-top:1em;>
+        <div class="item">
+            <div class="card">
+                <img src="include/profile-img/img1.jpg" alt="John" style="width:100%">
+                <h1>Pallav Rai</h1>
+                <p class="title">CEO & Founder, Trenzcart.com</p>
+                <p>Khwaja Moinudin Chisti Language University</p>
+                <a href="https://github.com/pallavrai"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <p><button>Contact</button></p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="card">
+                <img src="include/profile-img/img.jpg" alt="John" style="width:100%">
+                <h1>Mohammad Ashif</h1>
+                <p class="title">CEO & Founder, CashJila.com</p>
+                <p>Khwaja Moinudin Chisti Language University</p>
+                <a href="https://github.com/MohammadAshif1001"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <p><button>Contact</button></p>
+            </div>
+        </div>
+        <div class="item">
+            <div class="card">
+                <img src="include/profile-img/img3.jpg" alt="John" style="width:100%">
+                <h1>Uknown</h1>
+                <p class="title">CEO & Founder, xyz.com</p>
+                <p>Khwaja Moinudin Chisti Language University</p>
+                <a href="https://github.com/MohammadAshif1001"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fa fa-twitter"></i></a>
+                <a href="#"><i class="fa fa-linkedin"></i></a>
+                <a href="#"><i class="fa fa-facebook"></i></a>
+                <p><button>Contact</button></p>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+    <!-- Carousel End -->
+
+
+
+    <!-- Footer -->
+    <div class=" footer">
+        <footer class="text-center text-white" style="background-color: #f1f1f1;">
+            <!-- Grid container -->
+            <div class="container pt-4">
+                <!-- Section: Social media -->
+                <section class="mb-4 d-flex justify-content-center">
+                    <!-- Added class "d-flex justify-content-center" -->
+                    <!-- Facebook -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-facebook-f"></i></a>
+
+                    <!-- Twitter -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-twitter"></i></a>
+
+                    <!-- Google -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-google"></i></a>
+
+                    <!-- Instagram -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-instagram"></i></a>
+
+                    <!-- Linkedin -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-linkedin"></i></a>
+
+                    <!-- Github -->
+                    <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                        data-mdb-ripple-color="dark"><i class="fab fa-github"></i></a>
+                </section>
+                <!-- Section: Social media -->
+            </div>
+            <!-- Grid container -->
+
+            <!-- Copyright -->
+            <div class="text-center text-dark p-3">
+                © 2023 Copyright:
+                <a class=" text-dark" href="#">Copyright.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+
+        <script src="include/script.js"> </script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                $('#slider.owl-carousel').owlCarousel({
+                    loop: true,
+                    margin: 10,
+                    nav: false,
+                    autoplay: true,
+                    dots: false,
+                    autoplayTimeout: 3000,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 3
+                        },
+                        1000: {
+                            items: 3
+                        }
+                    }
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#pro_slider.owl-carousel').owlCarousel({
+                    loop: true,
+                    nav: false,
+                    autoplay: true,
+                    dots: false,
+                    autoplayTimeout: 3000,
+                    responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 4
+                        }
+                    }
+                });
+            });
+        </script>
+        <!-- Carousel End -->
+</body>
+
+</html>
