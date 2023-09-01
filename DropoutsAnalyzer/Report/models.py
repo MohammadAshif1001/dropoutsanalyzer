@@ -4,7 +4,8 @@ from django.db import models
 class School(models.Model):
 
     name = models.CharField(max_length=100)
-    area = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
 
     
     def __str__(self):
@@ -25,9 +26,34 @@ class Student(models.Model):
 
 
 class Dropout(models.Model):
-    reason = models.TextField()
+    REASON_CHOICES = [
+        ('lack_of_interest', 'Lack of Interest'),
+        ('financial_issues', 'Financial Issues'),
+        ('personal_reasons', 'Personal Reasons'),
+        ('academic_difficulties', 'Academic Difficulties'),
+        ('other_reason', 'Other Reason')
+    ]
+
+    reason = models.CharField(
+        max_length=50,
+        choices=REASON_CHOICES,
+        default='lack_of_interest'
+    )
+
+    custom_reason = models.TextField(
+        blank=True,
+        null=True,
+        verbose_name="Custom Reason",
+        help_text="Please provide your custom reason here if you selected 'Other Reason' above."
+    )
+
     date = models.DateField()
     student = models.OneToOneField(Student, on_delete=models.CASCADE, related_name='dropout')
+
+    def save(self, *args, **kwargs):
+        if self.reason != 'other_reason':
+            self.custom_reason = None
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.reason
