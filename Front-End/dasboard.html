@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="include/Style/style.css">
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <div class="nav" style=>
+        <nav class="navbar" style="padding: 10px;">
+            <!-- Heading -->
+            <div class="logo">Dashboard</div>
+            <!-- NAVIGATION MENU -->
+            <ul class="nav-links">
+                <!-- USING CHECKBOX HACK -->
+                <input type="checkbox" id="checkbox_toggle" />
+                <label for="checkbox_toggle" class="hamburger">&#9776;</label>
+                <!-- NAVIGATION MENUS -->
+                <div class="menu">
+                    <li><a href="/dropoutsanalyzer/Front-End/index.html">Home</a></li>
+                </div>
+            </ul>
+        </nav>
+    </div>
+
+
+    <!-- Dashboard Box Data -->
+    <div class="container">
+        <div class="box-container">
+            <div class="icon">
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark">
+                    <i class="fas fa-globe"></i>
+                </a>
+            </div>
+            <div class="box-container">
+                <span id="worldText">World</span>
+            </div>
+        </div>
+        <div class="box-container">
+            <div class="icon">
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark">
+                    <i class="fas fa-flag"></i>
+                </a>
+            </div>
+            <div class="box-container">
+                <span id="indiaText">India</span>
+            </div>
+        </div>
+        <div class="box-container">
+            <div class="icon">
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark">
+                    <i class="fas fa-map-marker-alt"></i>
+                </a>
+            </div>
+            <div class="box-container">
+                <span id="stateText">State</span>
+            </div>
+        </div>
+        <div class="box-container">
+            <div class="icon">
+                <a class="btn btn-link btn-floating btn-lg text-dark m-1" href="#!" role="button"
+                    data-mdb-ripple-color="dark">
+                    <i class="fas fa-map"></i>
+                </a>
+            </div>
+            <div class="box-container">
+                <span id="districtText">District</span>
+            </div>
+        </div>
+    </div>
+    <!-- Dashboard Box Data End -->
+    <!-- Dashboard Box Data -->
+    <div class="container">
+        <div class="box-container">
+            <div class="box-container">
+                <i class="fas fa-globe">&nbsp; &nbsp;</i>
+                <span id="worldText">World</span>
+            </div>
+        </div>
+        <div class="box-container">
+            <div class="box-container">
+                <i class="fas fa-flag">&nbsp; &nbsp;</i>
+                <span id="indiaText">India</span>
+            </div>
+        </div>
+        <div class="box-container">
+            <div class="box-container">
+                <i class="fas fa-map-marker-alt">&nbsp; &nbsp;</i>
+                <span id="stateText">State</span>
+            </div>
+        </div>
+        <div class="box-container">
+            <div class="box-container">
+                <i class="fas fa-map">&nbsp; &nbsp;</i>
+                <span id="districtText">District</span>
+            </div>
+        </div>
+        
+        </div>
+    </div>
+    <!-- Dashboard Box Data End -->
+
+
+    <!--Graph Data Dashboard -->
+    <div class="graph-container" style="margin-top: 1rem;">
+        <div class="chart-container">
+            <canvas id="myChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="myChart1" style="width:100%;max-width:600px"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="myChart3" style="width:100%;max-width:600px"></canvas>
+        </div>
+    </div>
+
+    <!--Graph Data Dashboard End -->
+
+
+
+    <!-- Footer -->
+    <div class=" footer">
+        <footer class="text-center text-white" style="background-color: #f1f1f1;">
+            <!-- Copyright -->
+            <div class="text-center text-dark p-3">
+                © 2023 Copyright:
+                <a class=" text-dark" href="#">Copyright.com</a>
+            </div>
+            <!-- Copyright -->
+        </footer>
+        <!-- Footer End -->
+
+
+<script>
+    
+
+            // Example data 
+            const worldData = 12333;
+            const indiaData = 2222;
+            const stateData = 1222;
+            const districtData = 123;
+
+            // Update the text for each section
+            document.getElementById("worldText").textContent = `World: ${worldData}`;
+            document.getElementById("indiaText").textContent = `India: ${indiaData}`;
+            document.getElementById("stateText").textContent = `State: ${stateData}`;
+            document.getElementById("districtText").textContent = `District: ${districtData}`;
+
+
+//Chart Data 
+            // Generate more data points
+            const dataPoints = [...Array(200).keys()]; // 200 data points for the X-axis
+
+            // Generate dummy data for the Y-axis (sea wave-like values)
+            const seaWaveValues = dataPoints.map(x =>
+                Math.sin(x / 10) * 20 + Math.sin(x / 20) * 10
+            );
+
+            // Get the canvas element
+            const ctx = document.getElementById('myChart').getContext('2d');
+
+            // Create a linear gradient for the background
+            const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+            gradient.addColorStop(0, 'rgba(0, 119, 204, 0.8)'); // Light blue
+            gradient.addColorStop(1, 'rgba(0, 119, 204, 0.2)'); // Transparent
+
+            // Create the chart
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: dataPoints,
+                    datasets: [{
+                        data: seaWaveValues,
+                        borderColor: 'rgba(0, 119, 204, 1)', // Line color
+                        borderWidth: 2, // Line width
+                        pointRadius: 0, // No data points
+                        backgroundColor: gradient, // Background gradient
+                    }],
+                },
+                options: {
+                    responsive: true, // Make the chart responsive
+                    maintainAspectRatio: false, // Allow aspect ratio to adjust
+
+                    scales: {
+                        x: {
+                            display: false, // Hide the X-axis
+                        },
+                        y: {
+                            beginAtZero: false,
+                            ticks: {
+                                display: false, // Hide Y-axis labels
+                            },
+                        },
+                    },
+                    plugins: {
+                        legend: {
+                            display: false, // Hide the legend
+                        },
+                    },
+                },
+            });
+
+
+//Chart 2
+
+            const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+
+            new Chart("myChart2", {
+                type: "line",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+                        borderColor: "red",
+                        fill: false
+                    }, {
+                        data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
+                        borderColor: "green",
+                        fill: false
+                    }, {
+                        data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+                        borderColor: "blue",
+                        fill: false
+                    }]
+                },
+                options: {
+                    legend: { display: false }
+                }
+            });
+
+
+
+
+
+
+// Chart 1
+            const yValues = [55, 49, 44, 24, 15];
+            const barColors = [
+                "#b91d47",
+                "#00aba9",
+                "#2b5797",
+                "#e8c3b9",
+                "#1e7145"
+            ];
+
+            new Chart("myChart1", {
+                type: "doughnut",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "World Wide Wine Production 2018"
+                    }
+                }
+            });
+
+
+// Chart 3
+            new Chart("myChart3", {
+                type: "pie",
+                data: {
+                    labels: xValues,
+                    datasets: [{
+                        backgroundColor: barColors,
+                        data: yValues
+                    }]
+                },
+                options: {
+                    title: {
+                        display: true,
+                        text: "World Wide Wine Production"
+                    }
+                }
+            });
+</script>
+</body>
+
+</html>

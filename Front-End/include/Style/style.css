@@ -296,3 +296,63 @@ a {
 button:hover, a:hover {
   opacity: 0.7;
 }
+
+
+/**********************************|
+******* Dashboard Style ***********|
+***********************************|*/
+
+
+ /* Base styles for .container */
+ .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+.box-container {
+  flex: 1;
+  min-width: calc(20% - 20px);
+  padding: 5px;
+  margin: 10px;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+/* Responsive styles for screens with a width less than 768px */
+@media (max-width: 767px) {
+  .container {
+      justify-content: center;
+  }
+
+  .box-container {
+      flex-basis: calc(50% - 20px);
+  }
+}
+
+/* Grid container for .graph-container */
+.graph-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(calc(50% - 10px), 1fr));
+  /* Dynamic two columns with gaps */
+  grid-gap: 10px;
+  background-color: whitesmoke;
+  padding: 10px;
+}
+
+/* Reset grid-template-columns for screens with a width less than 768px */
+@media (max-width: 767px) {
+  .graph-container {
+      grid-template-columns: auto;
+      /* Single column for small screens */
+  }
+}
+
+.chart-container{
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
