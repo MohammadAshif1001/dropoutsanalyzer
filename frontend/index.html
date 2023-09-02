@@ -136,6 +136,27 @@
         <main>
           <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <!-- Your content -->
+
+
+            <script>
+              // Make a GET request to the URL
+                      fetch('http://127.0.0.1:8000/filter/caste')
+                        .then(response => response.json())
+                        .then(data => {
+                          // Loop through each record in the response
+                          for (const key in data) {
+                            if (data.hasOwnProperty(key)) {
+                              const value = data[key];
+                              console.log(`Key: ${key}, Value: ${value}`);
+                            }
+                          }
+                        })
+                        .catch(error => {
+                          console.error('Error:', error);
+                        });
+
+            </script>
+
           </div>
         </main>
       </div>
