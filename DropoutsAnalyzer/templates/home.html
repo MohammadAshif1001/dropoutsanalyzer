@@ -8,6 +8,27 @@
 
 
 {% block content %}
+<script>
+var data = {{ api_data | safe}};
+
+function extractStateAndCount(data) {
+  var stateList = [];
+  var studentCountList = [];
+  
+  for (var i = 0; i < data.length; i++) {
+    var item = data[i];
+    stateList.push(item.state);
+    studentCountList.push(item.student_count);
+  }
+  
+  return { state: stateList, student_count: studentCountList };
+}
+
+// Call the function with the input data
+var result = extractStateAndCount(data);
+
+</script>
+
 <div class="content">
   <div class="row">
     <div class="col-lg-3 col-md-6 col-sm-6">
@@ -123,31 +144,8 @@
           <p class="card-category">24 Hours performance</p>
         </div>
         <div class="card-body ">
-          <canvas id=chartHours width="400" height="100"></canvas>
-
-
-          <script>
-            const labels = Utils.months({count: 7});
-const data = {
-  labels: labels,
-  datasets: [{
-    label: 'My First Dataset',
-    data: [65, 59, 80, 81, 56, 55, 40],
-    fill: false,
-    borderColor: 'rgb(75, 192, 192)',
-    tension: 0.1
-  }]
-};
-// </block:setup>
-
-// <block:config:0>
-const config = {
-  type: 'line',
-  data: data,
-};
-// </block:config>
-
-          </script>
+          
+          <canvas id="Dropout_states" width="400" height="100"></canvas>
 
         </div>
         <div class="card-footer ">
@@ -167,7 +165,8 @@ const config = {
           <p class="card-category">Based on Caste</p>
         </div>
         <div class="card-body ">
-          <canvas id="chartEmail"></canvas>
+          <canvas id="Dropout_castes" width="400" height="100"></canvas>
+
         </div>
         <div class="card-footer ">
           <div class="legend">
@@ -178,11 +177,7 @@ const config = {
           </div>
           <hr>
           <div class="stats">
-            {% if api_data %}
-               {{ api_data }}
-    {% else %}
-        <p>No data available from the API.</p>
-    {% endif %}
+            
             <i class="fa fa-calendar"></i> Number of emails sent
           </div>
         </div>
@@ -195,7 +190,7 @@ const config = {
           <p class="card-category">City wise chart</p>
         </div>
         <div class="card-body">
-          <canvas id="speedChart" width="400" height="100"></canvas>
+          <canvas id="Dropout_city" width="400" height="100"></canvas>
         </div>
         <div class="card-footer">
           <div class="chart-legend">
