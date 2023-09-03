@@ -18,7 +18,7 @@
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" />
     <link href="{% static 'css/' %}paper-dashboard.css?v=2.0.1" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="{% static 'demo/' %}demo.css" rel="stylesheet" />
+    <link href="{% static 'Charts/' %}demo.css" rel="stylesheet" />
   </head>
   
   <body class="">
@@ -38,16 +38,38 @@
             </div> -->
           </a>
         </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              
+                    // Get the current URL
+                    var currentURL = window.location.href;
+                    var match = currentURL.match(/\/([^/]+)\/?$/);
+                    var postfix = 'home';
+                    if (match && match[1]) {
+                        postfix = match[1];
+                    }
+                    if (postfix === window.location.hostname) {
+                      postfix = 'home';
+                        }
+                    var element = document.getElementById(postfix);
+                    console.log(window.location.hostname)
+                    if (element) {
+
+                      element.setAttribute('class', 'active');
+                    }
+                });
+
+        </script>
         <div class="sidebar-wrapper">
           <ul class="nav">
-            <li>
-              <a href="javascript:;">
+            <li id="home">
+              <a href="{% url 'home' %}">
                 <i class="nc-icon nc-bank"></i>
                 <p>Home</p>
               </a>
             </li >
-            <li class="active ">
-              <a href="javascript:;">
+            <li id="charts">
+              <a href="{% url 'charts' %}">
                 <i class="nc-icon nc-chart-bar-32"></i>
                 <p>Chart View</p>
               </a>
@@ -121,7 +143,7 @@
 
 
 
-<footer class="footer footer-black  footer-white ">
+<!-- <footer class="footer footer-black  footer-white ">
   <div class="container-fluid">
     <div class="row">
       <nav class="footer-nav">
@@ -140,7 +162,7 @@
       </div>
     </div>
   </div>
-</footer>
+</footer> -->
 </div>
 </div>
 <!--   Core JS Files   -->

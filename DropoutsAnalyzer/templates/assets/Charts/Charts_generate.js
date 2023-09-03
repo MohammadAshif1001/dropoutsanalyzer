@@ -26,15 +26,10 @@ const ctx = document.getElementById('Dropout_states');
   new Chart(ctx_castefilter, {
     type: 'pie',
     data: {
-      labels: [
-        "Andhra Pradesh",
-        "Arunachal Pradesh",
-        "Assam",
-        
-      ],
+      labels: caste_data.caste,
       datasets: [{
         label: '# of Dropouts',
-        data: [42,15,73],
+        data: caste_data.student_count,
         borderWidth: 1
       }]
     },
@@ -51,15 +46,10 @@ const ctx = document.getElementById('Dropout_states');
   new Chart(ctx_cityfilter, {
     type: 'doughnut',
     data: {
-      labels: [
-        "Andhra Pradesh",
-        "Arunachal Pradesh",
-        "Assam",
-        
-      ],
+      labels: city_data.city,
       datasets: [{
         label: '# of Dropouts',
-        data: [42,15,73],
+        data: city_data.student_count,
         borderWidth: 1
       }]
     },

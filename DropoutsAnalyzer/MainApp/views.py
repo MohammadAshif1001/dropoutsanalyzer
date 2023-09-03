@@ -2,23 +2,43 @@ from django.shortcuts import render
 from django.views import View
 import requests
 
+
+
 class HomePage(View):
     template_name='home.html'
     def get(self,request):
-        api_url = 'http://127.0.0.1:8000/filter/state'  # Replace with the actual API URL
+        return render(request,self.template_name)
+
+
+
+class Charts_api():
+    def request_data(self,url):
+        api_url = url  
 
         try:
             response = requests.get(api_url)
 
             if response.status_code == 200:
-                json_data = response.json()
+                return response.json()
             else:
-                json_data = {'error': 'Failed to fetch data'}
+                return {'error': 'Failed to fetch data'}
 
         except requests.exceptions.RequestException as e:
-            json_data = {'error': f'Request error: {e}'}
+            return {'error': f'Request error: {e}'}
 
+
+
+class ChartPage(View):
+    template_name='charts.html'
+    def get(self,request):
+        api=Charts_api()
+        states_data=api.request_data(request.build_absolute_uri('/filter/state'))
+        castes_data=api.request_data(request.build_absolute_uri('/filter/caste'))
+        cities_data=api.request_data(request.build_absolute_uri('/filter/city'))
+        
         context = {
-            'api_data': json_data['results'],  # Add the API data to the context
+            'states_data': states_data['results'],
+            'castes_data': castes_data['results'],
+            'cities_data': cities_data['results'],
         }
         return render(request,self.template_name,context)
