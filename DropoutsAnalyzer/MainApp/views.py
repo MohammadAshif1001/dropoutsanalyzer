@@ -49,7 +49,6 @@ class VolunteerPage(View):
     template_name='volunteer.html'
     def get(self,request):
         instance=Student.objects.all().order_by('age').values()
-        print(instance)
         context={
         'students':instance
         }

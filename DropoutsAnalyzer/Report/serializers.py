@@ -12,7 +12,7 @@ class StudentSerializer(serializers.ModelSerializer):
    
     class Meta:
         model = Student
-        fields = ['name', 'gender', 'caste', 'age', 'standard']
+        fields = '__all__'
 
 
 class DropoutSerializer(serializers.ModelSerializer):

@@ -18,6 +18,10 @@ class Student(models.Model):
     caste = models.CharField(max_length=20, choices=[('SC', 'Scheduled Caste'), ('ST', 'Scheduled Tribe'), ('OBC', 'Other Backward Class'), ('GEN', 'General')])
     age = models.IntegerField()
     standard = models.IntegerField()
+    email = models.EmailField(default='abc@gmail.com')
+    mobile_no = models.BigIntegerField(default=9898245213)
+
+
 
     school = models.ForeignKey(School, on_delete=models.CASCADE, related_name='students')
 

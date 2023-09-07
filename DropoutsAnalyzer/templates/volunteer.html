@@ -23,8 +23,14 @@
                   <th>
                     Age
                   </th>
-                  <th class="text-right">
+                  <th>
                     Standard
+                  </th>
+                  <th>
+                    Email
+                  </th>
+                  <th class="text-right">
+                    Mobile No.
                   </th>
                 </thead>
                 <tbody>
@@ -39,8 +45,14 @@
                         <td>
                             {{stu.age}}
                         </td>
+                        <td>
+                          {{stu.standard}}
+                      </td>
+                      <td>
+                        {{stu.email}}
+                    </td>
                         <td class="text-right">
-                            {{stu.standard}}
+                            {{stu.mobile_no}}
                         </td>
                       </tr>
                     {% endfor %}
