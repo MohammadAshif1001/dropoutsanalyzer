@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block panel_title %}Volunteer{% endblock %}
+
+{% block content %}
+
+<div class="content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">GUIDE THEM</h4>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table">
+                <thead class=" text-primary">
+                  <th>
+                    Name
+                  </th>
+                  <th>
+                    Gender
+                  </th>
+                  <th>
+                    Age
+                  </th>
+                  <th class="text-right">
+                    Standard
+                  </th>
+                </thead>
+                <tbody>
+                    {% for stu in students %}
+                    <tr>
+                        <td>
+                          {{stu.name}}
+                        </td>
+                        <td>
+                            {{stu.gender}}
+                        </td>
+                        <td>
+                            {{stu.age}}
+                        </td>
+                        <td class="text-right">
+                            {{stu.standard}}
+                        </td>
+                      </tr>
+                    {% endfor %}
+                  
+                  
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}

@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.views import View
+from Report.models import Student
 import requests
 
 
@@ -40,5 +41,16 @@ class ChartPage(View):
             'states_data': states_data['results'],
             'castes_data': castes_data['results'],
             'cities_data': cities_data['results'],
+        }
+        return render(request,self.template_name,context)
+
+
+class VolunteerPage(View):
+    template_name='volunteer.html'
+    def get(self,request):
+        instance=Student.objects.all().order_by('age').values()
+        print(instance)
+        context={
+        'students':instance
         }
         return render(request,self.template_name,context)
