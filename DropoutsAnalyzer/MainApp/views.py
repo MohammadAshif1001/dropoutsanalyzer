@@ -3,6 +3,10 @@ from django.views import View
 from Report.models import Student,School,Dropout
 import requests
 from datetime import date
+from django.db.models import F, Q, Value
+from django.db.models.functions import Coalesce
+from django.db.models import CharField, Case, When
+
 
 
 
@@ -58,7 +62,25 @@ class ChartPage(View):
 class VolunteerPage(View):
     template_name='volunteer.html'
     def get(self,request):
-        instance=Student.objects.all().order_by('age').values()
+        instance=Student.objects.filter(dropout__isnull=False).annotate(
+    dropout_reason=Coalesce(
+        Case(
+            When(
+                dropout__reason='other_reason',
+                then=F('dropout__custom_reason')
+            ),
+            When(
+                dropout__reason='other_reason',
+                dropout__custom_reason__isnull=True,
+                then=Value('No Custom Reason')
+            ),
+            default=F('dropout__reason'),
+            output_field=CharField()
+        ),
+        Value('No Dropout Reason')
+    )
+).values('id', 'name', 'gender', 'caste', 'age', 'standard', 'email', 'mobile_no', 'school__name', 'dropout_reason')
+
         context={
         'students':instance
         }
