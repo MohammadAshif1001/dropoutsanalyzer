@@ -27,7 +27,7 @@
 Dropouts Analyzer works with Python 3, on any platform.
 
 To get started with using Dropouts Analyzer, run the following in a virtual environment:
-```
+```bash
 pip install -r requirements.txt
 cd DropoutsAnalyzer
 python manage.py migrate
