@@ -2,76 +2,85 @@
 {% block panel_title %}Volunteer{% endblock %}
 
 {% block content %}
+<style>
+  .blur-text {
+    filter: blur(5px); 
+  }
+</style>
 
 <div class="content">
     <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h4 class="card-title">GUIDE THEM</h4>
-          </div>
-          <div class="card-body">
-            <div class="table-responsive">
-              <table class="table">
-                <thead class=" text-primary">
-                  <th>
-                    Name
-                  </th>
-                  <th>
-                    Dropout Reason
-                  </th>
-                  <th>
-                    Gender
-                  </th>
-                  <th>
-                    Age
-                  </th>
-                  <th>
-                    Standard
-                  </th>
-                  <th>
-                    Email
-                  </th>
-                  <th class="text-right">
-                    Mobile No.
-                  </th>
-                </thead>
-                <tbody>
-                    {% for stu in students %}
-                    <tr>
-                        <td>
-                          {{stu.name}}
-                        </td>
-                        <td>
-                          {{stu.dropout_reason}}
-                        </td>
-                        <td>
-                            {{stu.gender}}
-                        </td>
-                        <td>
-                            {{stu.age}}
-                        </td>
-                        <td>
-                          {{stu.standard}}
-                      </td>
-                      <td>
-                        {{stu.email}}
-                    </td>
-                        <td class="text-right">
-                            {{stu.mobile_no}}
-                        </td>
-                      </tr>
-                    {% endfor %}
-                  
-                  
-                </tbody>
-              </table>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">GUIDE THEM</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class="text-primary">
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Dropout Reason
+                                </th>
+                                <th>
+                                    Gender
+                                </th>
+                                <th>
+                                    Age
+                                </th>
+                                <th>
+                                    Standard
+                                </th>
+                                <th>
+                                     Email
+                                </th>
+                                <th class="text-right">
+                                    Mobile No.
+                                </th>
+                            </thead>
+                            <tbody>
+                                {% for stu in students %}
+                                <tr>
+                                    <td>
+                                        {{ stu.name }}
+                                    </td>
+                                    <td>
+                                        {{ stu.dropout_reason }}
+                                    </td>
+                                    <td>
+                                        {{ stu.gender }}
+                                    </td>
+                                    <td>
+                                        {{ stu.age }}
+                                    </td>
+                                    <td>
+                                        {{ stu.standard }}
+                                    </td>
+                                    <td>
+                                        {% if user_is_logged_in %}
+                                            {{ stu.email }}
+                                        {% else %}
+                                            <span class="blur-text">{{ stu.email }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-right">
+                                        {% if user_is_logged_in %}
+                                            {{ stu.mobile_no }}
+                                        {% else %}
+                                            <span class="blur-text">{{ stu.mobile_no }}</span>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
-
-
+</div>
 {% endblock %}
