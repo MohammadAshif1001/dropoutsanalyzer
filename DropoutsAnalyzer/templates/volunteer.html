@@ -4,9 +4,12 @@
 {% block content %}
 <style>
   .blur-text {
-    filter: blur(5px); 
+    user-select: none;
+    filter: blur(5px);
+
   }
 </style>
+
 
 <div class="content">
     <div class="row">
@@ -63,7 +66,7 @@
                                         {% if user_is_logged_in %}
                                             {{ stu.email }}
                                         {% else %}
-                                            <span class="blur-text">{{ stu.email }}</span>
+                                            <span class="blur-text" onselect="false">{{ stu.email }}</span>
                                         {% endif %}
                                     </td>
                                     <td class="text-right">
